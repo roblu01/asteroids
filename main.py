@@ -41,9 +41,13 @@ def main():
         updatable.update(dt)  #pygame groups
         for obj in drawable:  #pygame groups
             obj.draw(screen)  #pygame groups
-        for obj in asteroids:
-            if obj.collision(player) == True:
+        for ast in asteroids:
+            if ast.collision(player) == True:
                 sys.exit("Game over!")
+            for shot in shots:
+                if shot.collision(ast) == True:
+                    shot.kill()
+                    ast.split() 
 
         pygame.display.flip()
         dt = clock.tick(60)/1000
